@@ -12,6 +12,9 @@ font_data = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -22,16 +25,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DisplayText" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 24.0
 margin_top = 24.0
 margin_right = -24.0
 margin_bottom = -24.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DisplayText" type="Label" parent="VBoxContainer"]
+margin_top = 74.0
+margin_right = 976.0
+margin_bottom = 474.0
+rect_min_size = Vector2( 0, 400 )
 custom_fonts/font = SubResource( 1 )
 text = "placeholder text"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PlayerText" type="LineEdit" parent="VBoxContainer"]
+margin_top = 479.0
+margin_right = 976.0
+margin_bottom = 552.0
+custom_fonts/font = SubResource( 1 )
+[connection signal="text_entered" from="VBoxContainer/PlayerText" to="." method="_on_PlayerText_text_entered"]
