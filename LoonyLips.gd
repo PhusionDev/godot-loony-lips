@@ -1,17 +1,6 @@
 extends Control
 
 var player_words = []
-
-var template = [
-	{
-		"prompts": ["a name", "a noun", "an adverb", "an adjective"],
-		"story": "Once upon a time someone called %s ate a %s flavored sandwich which made him feel all %s inside. It was a %s day."
-	},
-	{
-		"prompts": ["a name", "another name", "an adjective", "a place"],
-		"story": "%s was hanging out with %s when all of a sudden a %s rabbit appeared out from %s"
-	}
-	]
 var current_story = {}
 
 onready var DisplayText = $VBoxContainer/DisplayText
@@ -27,12 +16,22 @@ func _ready():
 
 func set_current_story():
 	randomize()
-	var stories = $StoryBook.get_child_count()
-	var selected_story = randi() % stories
-	current_story.prompts = $StoryBook.get_child(selected_story).prompts
-	current_story.story = $StoryBook.get_child(selected_story).story
-	#current_story = template[randi() % template.size()]
-	
+	var stories = get_from_json("StoryBook.json")
+	current_story = stories[randi() % stories.size()]
+#	var stories = $StoryBook.get_child_count()
+#	var selected_story = randi() % stories
+#	current_story.prompts = $StoryBook.get_child(selected_story).prompts
+#	current_story.story = $StoryBook.get_child(selected_story).story
+#	#current_story = template[randi() % template.size()]
+
+func get_from_json(filename):
+	var file = File.new()
+	file.open(filename, File.READ)
+	var text = file.get_as_text()
+	var data = parse_json(text)
+	file.close()
+	return data
+
 func _on_PlayerText_text_entered(new_text):
 	add_to_player_words()
 
