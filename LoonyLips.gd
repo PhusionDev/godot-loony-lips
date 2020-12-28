@@ -12,7 +12,7 @@ var template = [
 		"story": "%s was hanging out with %s when all of a sudden a %s rabbit appeared out from %s"
 	}
 	]
-var current_story
+var current_story = {}
 
 onready var DisplayText = $VBoxContainer/DisplayText
 onready var PlayerText = $VBoxContainer/HBoxContainer/PlayerText
@@ -27,7 +27,11 @@ func _ready():
 
 func set_current_story():
 	randomize()
-	current_story = template[randi() % template.size()]
+	var stories = $StoryBook.get_child_count()
+	var selected_story = randi() % stories
+	current_story.prompts = $StoryBook.get_child(selected_story).prompts
+	current_story.story = $StoryBook.get_child(selected_story).story
+	#current_story = template[randi() % template.size()]
 	
 func _on_PlayerText_text_entered(new_text):
 	add_to_player_words()
