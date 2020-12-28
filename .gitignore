@@ -8,3 +8,5 @@ lib/
 
 git_api*
 .DS_Store
+*.dmg
+export_presets.cfg
