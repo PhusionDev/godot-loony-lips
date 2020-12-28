@@ -16,13 +16,8 @@ func _ready():
 
 func set_current_story():
 	randomize()
-	var stories = get_from_json("StoryBook.json")
+	var stories = get_from_json("res://StoryBook.json")
 	current_story = stories[randi() % stories.size()]
-#	var stories = $StoryBook.get_child_count()
-#	var selected_story = randi() % stories
-#	current_story.prompts = $StoryBook.get_child(selected_story).prompts
-#	current_story.story = $StoryBook.get_child(selected_story).story
-#	#current_story = template[randi() % template.size()]
 
 func get_from_json(filename):
 	var file = File.new()
